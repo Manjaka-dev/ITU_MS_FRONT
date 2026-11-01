@@ -1,0 +1,13 @@
+{
+  "name": "itu-ms-front",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build-web.mjs",
+    "configure:vercel": "node scripts/configure-vercel.mjs"
+  }
+}

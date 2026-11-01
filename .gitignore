@@ -1,0 +1,21 @@
+.venv/
+.env
+.env.*
+!.env.example
+.local/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+.vercel/
+dist/
+node_modules/
+
+# Contexte local et réponses personnelles conservés hors du dépôt
+.agents/
+QUESTIONS-A-COMPLETER.md
+Commande/
+*.zip
+
+.neon
+.neon/

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390">
+<title>Coupé de démonstration — dessin générique ITUMS</title>
+<g stroke="#79ACC9" stroke-width="5" stroke-linejoin="round" fill="none">
+<path d="M61 244 104 211 245 190 345 95 559 95 679 177 792 199 843 247 829 305 762 313 136 313 65 297Z"/>
+<path d="m265 190 94-78 91 0 0 78ZM468 112h80l106 78H468Z"/>
+<path d="m61 244 206-3 410-64M267 241l-3 72M650 194l-1 117M120 213l48 31-32 35-67-7M703 194l-26 47 130 8 13-24M276 269h362M104 294h31M768 292h64"/>
+<path d="M331 253h60M575 212h34M827 260l-31 9M243 190l17 34M365 102l11-25M699 177l20-21h64v12l-28 23"/>
+<circle cx="211" cy="303" r="61" fill="#0c1b29"/><circle cx="211" cy="303" r="40"/>
+<circle cx="700" cy="303" r="61" fill="#0c1b29"/><circle cx="700" cy="303" r="40"/>
+<path d="m211 264 0 78m-39-39h78m-67-28 56 56m0-56-56 56M700 264v78m-39-39h78m-67-28 56 56m0-56-56 56" stroke-width="3"/>
+</g></svg>

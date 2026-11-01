@@ -1,0 +1,11 @@
+{
+  "white": {"label":"Blanc","hex":"#f6f5f1","dark":false,"categories":["tshirt"]},
+  "bone": {"label":"Blanc cassé","aliases":["Écru"],"hex":"#e9e1d0","dark":false,"categories":["tshirt"]},
+  "black": {"label":"Noir","hex":"#202127","dark":true,"categories":["tshirt","sweat"]},
+  "gray": {"label":"Gris","hex":"#92949a","dark":false,"categories":["tshirt","sweat"]},
+  "purple": {"label":"Violet","hex":"#704d86","dark":true,"categories":["tshirt"]},
+  "red": {"label":"Rouge","hex":"#b4353b","dark":true,"categories":["tshirt"]},
+  "darkgray": {"label":"Gris foncé","hex":"#4c5055","dark":true,"categories":["sweat"]},
+  "lightgray": {"label":"Gris clair","hex":"#c7c8c9","dark":false,"categories":["sweat"]},
+  "navy": {"label":"Bleu nuit","hex":"#192638","dark":true,"categories":[]}
+}

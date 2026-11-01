@@ -1,0 +1,10 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const value=process.env.ITUMS_API_ORIGIN;
+if(!value)throw new Error('Renseigner ITUMS_API_ORIGIN avec l’origine HTTPS réelle de l’API Render.');
+const url=new URL(value);
+if(url.protocol!=='https:'||url.username||url.password||url.pathname!=='/'||url.search||url.hash)throw new Error('Utiliser uniquement une origine HTTPS, sans chemin ni identifiant.');
+const file=new URL('../vercel.json',import.meta.url);
+const config=JSON.parse(await readFile(file,'utf8'));
+config.rewrites=[{source:'/api/:path*',destination:url.origin+'/api/:path*'},...config.rewrites.filter(rule=>rule.source!=='/api/:path*')];
+await writeFile(file,JSON.stringify(config,null,2)+'\n');
+console.log('Proxy /api configuré vers l’API Render indiquée.');

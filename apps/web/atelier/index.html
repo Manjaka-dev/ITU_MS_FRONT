@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17262e">
+  <meta name="description" content="Créez votre t-shirt ITUMS avec l’illustration de votre voiture.">
+  <title>Votre t-shirt — ITU Motors Society</title>
+  <link rel="icon" type="image/png" href="/assets/configurator/symbol.png">
+  <link rel="stylesheet" href="/atelier/styles.css?v=20261101c">
+  <script type="module" src="/atelier/app.js?v=20261101c"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="ITU Motors Society — accueil"><img src="/assets/configurator/wordmark.png" alt="ITU Motors Society"></a>
+    <span class="atelier-label">L’ATELIER</span><span class="prototype-badge">Prototype</span>
+  </header>
+  <main>
+    <div class="studio">
+      <section class="preview-panel" aria-label="Aperçu de votre t-shirt">
+        <div class="preview-toolbar"><span id="preview-template">HERITAGE</span><div class="segmented" aria-label="Face du vêtement"><button id="front" aria-pressed="true">Devant</button><button id="back" aria-pressed="false">Dos</button></div></div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <svg id="shirt" viewBox="0 0 700 800" role="img" aria-labelledby="shirt-title">
+            <title id="shirt-title">Aperçu du t-shirt Heritage, devant</title>
+            <defs>
+              <linearGradient id="fabric" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cec8bc"/><stop offset=".19" stop-color="#e9e4d8"/><stop offset=".46" stop-color="#faf7ef"/><stop offset=".76" stop-color="#e9e4d9"/><stop offset="1" stop-color="#c7c1b5"/></linearGradient>
+              <radialGradient id="fabric-light" cx=".42" cy=".28" r=".65"><stop stop-color="#fff" stop-opacity=".36"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+              <linearGradient id="fold-shadow"><stop stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity=".15"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+              <linearGradient id="fold-light"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <linearGradient id="sleeve-shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
+              <filter id="soft-fold" x="-.5" y="-.2" width="2" height="1.4"><feGaussianBlur stdDeviation="7"/></filter>
+              <filter id="ground-shadow" x="-.3" y="-1" width="1.6" height="3"><feGaussianBlur stdDeviation="8"/></filter>
+              <filter id="cotton-grain" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+              <clipPath id="shirt-clip"><path id="shirt-outline" d="M264 76 Q350 126 436 76 C460 81 484 91 511 100 L558 117 Q573 125 582 142 L654 268 Q657 274 651 278 L559 326 Q552 329 547 321 L526 284 C525 397 527 547 536 708 Q535 719 522 721 Q350 740 178 721 Q165 719 164 708 C173 547 175 397 174 284 L153 321 Q148 329 141 326 L49 278 Q43 274 46 268 L118 142 Q127 125 142 117 L189 100 Q230 83 264 76 Z"/></clipPath>
+            </defs>
+            <ellipse cx="350" cy="760" rx="174" ry="12" fill="#23313a" opacity=".11" filter="url(#ground-shadow)"/>
+            <path id="neck-inner" d="M272 77 Q350 97 428 77 Q418 128 350 135 Q282 128 272 77Z" fill="#c1baac"/>
+            <path id="shirt-body" d="M264 76 Q350 126 436 76 C460 81 484 91 511 100 L558 117 Q573 125 582 142 L654 268 Q657 274 651 278 L559 326 Q552 329 547 321 L526 284 C525 397 527 547 536 708 Q535 719 522 721 Q350 740 178 721 Q165 719 164 708 C173 547 175 397 174 284 L153 321 Q148 329 141 326 L49 278 Q43 274 46 268 L118 142 Q127 125 142 117 L189 100 Q230 83 264 76 Z" fill="url(#fabric)" stroke="#c8c1b5" stroke-width=".8"/>
+            <g clip-path="url(#shirt-clip)">
+              <rect x="130" y="60" width="440" height="680" fill="url(#fabric-light)"/>
+              <path d="M142 117 Q176 148 176 223 L174 284 153 321 Q148 329 141 326 L49 278Z" fill="url(#sleeve-shade)"/>
+              <path d="M558 117 Q524 148 524 223 L526 284 547 321 Q552 329 559 326 L651 278Z" fill="url(#sleeve-shade)"/>
+              <path d="M182 252 Q224 391 187 714 L165 710 Q187 492 171 294Z" fill="url(#fold-shadow)" filter="url(#soft-fold)"/>
+              <path d="M518 252 Q476 391 513 714 L535 710 Q513 492 529 294Z" fill="url(#fold-shadow)" filter="url(#soft-fold)"/>
+              <path d="M210 193 Q234 362 214 683 L224 703 Q250 474 228 225Z" fill="url(#fold-light)" opacity=".65" filter="url(#soft-fold)"/>
+              <path d="M484 197 Q465 395 480 650 L464 701 Q450 469 470 232Z" fill="url(#fold-light)" opacity=".45" filter="url(#soft-fold)"/>
+              <path d="M149 147 Q179 192 174 264 L156 225Z M551 147 Q521 192 526 264 L544 225Z" fill="#000" opacity=".05" filter="url(#soft-fold)"/>
+              <path d="M185 103 Q173 174 174 284 M515 103 Q527 174 526 284" fill="none" stroke="#000" opacity=".095" stroke-width="1.1"/>
+              <path d="M58 261 148 309 M642 261 552 309 M173 705 Q350 727 527 705" fill="none" stroke="#000" opacity=".13" stroke-width=".8"/>
+              <path d="M58 264 148 312 M642 264 552 312 M173 708 Q350 730 527 708" fill="none" stroke="#fff" opacity=".22" stroke-width="1"/>
+              <image id="chest-logo" href="/assets/configurator/wordmark.png" x="275" y="177" width="150" height="85"/>
+              <image id="back-symbol" href="/assets/configurator/symbol.png" x="316" y="137" width="68" height="48" visibility="hidden"/>
+              <rect id="print-zone" x="181" y="452" width="338" height="224" rx="2" fill="none" stroke="#ce2d2b" stroke-width="1.2" stroke-dasharray="5 5" visibility="hidden"/>
+              <image id="print" x="181" y="452" width="338" height="224"/>
+              <rect x="35" y="50" width="630" height="690" filter="url(#cotton-grain)" opacity=".035"/>
+            </g>
+            <path id="collar" d="M264 76 Q350 126 436 76 L429 91 Q350 145 271 91Z" fill="#ded7ca" stroke="#b9b1a3" stroke-width=".7"/>
+            <path id="collar-stitch" d="M269 83 Q350 135 431 83" fill="none" stroke="#fff" opacity=".35" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="preview-footer"><span id="view-label">VUE DE FACE</span><span id="dimensions">30 × 19,9 cm</span></div>
+      </section>
+      <section class="controls" aria-label="Personnaliser le t-shirt">
+        <div class="controls-intro"><p class="eyebrow">FAITES-EN LE VÔTRE</p><h1>Votre voiture.<br>Votre t-shirt<span>.</span></h1></div>
+        <div class="step"><h2>Le modèle</h2><div class="template-cards"><button class="template-card selected" data-template="heritage" aria-pressed="true"><img src="/assets/configurator/heritage-reference.png" alt=""><span><strong>Heritage</strong><small>Devant</small></span></button><button class="template-card" data-template="blueprint" aria-pressed="false"><img src="/assets/configurator/blueprint-reference.png" alt=""><span><strong>Blueprint</strong><small>Dos</small></span></button></div></div>
+        <div class="step"><h2>Votre illustration</h2>
+          <label class="upload-zone" id="drop-zone" for="svg-file"><span class="upload-icon" aria-hidden="true">↥</span><span><strong>Importer ma voiture</strong><small>SVG · 1 Mo maximum</small></span><input id="svg-file" type="file" accept=".svg,image/svg+xml" aria-label="Importer le SVG de ma voiture"></label>
+          <div class="file-status" id="file-status" role="status" aria-live="polite"><span class="file-dot"></span><span id="file-label">Illustration d’origine</span><button id="restore" title="Restaurer l’illustration d’origine" aria-label="Restaurer l’illustration d’origine">↺</button></div>
+          <p id="error" class="error" role="alert" hidden></p>
+          <details class="help"><summary>Besoin d’un exemple ?</summary><div class="details-content"><p>Une voiture seule, sans fond, exportée en SVG simple avec les textes en tracés.</p><button id="try-sample" class="text-button">Essayer un exemple ↗</button><a href="/assets/configurator/coupe-exemple.svg" download="itums-coupe-exemple.svg">Télécharger le SVG</a></div></details>
+        </div>
+        <details class="adjustments"><summary>Ajuster le placement <span aria-hidden="true">+</span></summary><div class="details-content"><div class="slider-row"><label for="scale">Taille du visuel</label><output id="scale-value" for="scale">100 %</output><input id="scale" type="range" min="40" max="100" value="100"></div><div class="slider-row"><label for="horizontal">Position horizontale</label><output id="horizontal-value" for="horizontal">50 %</output><input id="horizontal" type="range" min="0" max="100" value="50"></div><div class="slider-row"><label for="vertical">Position verticale</label><output id="vertical-value" for="vertical">50 %</output><input id="vertical" type="range" min="0" max="100" value="50"></div><div class="adjustment-actions"><button id="reset" class="text-button">Réinitialiser</button><button id="zone-toggle" class="text-button" aria-pressed="false">Voir la zone d’impression</button></div></div></details>
+        <div class="garment-options"><fieldset><legend>Couleur <span id="color-label">Écru</span></legend><div class="swatches"><button class="swatch bone active" data-color="bone" aria-label="Écru" aria-pressed="true"></button><button class="swatch navy" data-color="navy" aria-label="Bleu nuit" aria-pressed="false"></button></div></fieldset><fieldset class="sizes"><legend>Taille</legend><div><button data-size="S" aria-pressed="false">S</button><button data-size="M" class="active" aria-pressed="true">M</button><button data-size="L" aria-pressed="false">L</button><button data-size="XL" aria-pressed="false">XL</button><button data-size="XXL" aria-pressed="false">XXL</button></div></fieldset></div>
+        <button id="approve" class="primary-button" disabled>Valider mon aperçu <span>↗</span></button>
+      </section>
+    </div>
+    <footer class="page-footer"><span>ITU MOTORS SOCIETY</span><span>Simulation du placement · Prototype sans commande réelle</span></footer>
+  </main>
+  <dialog id="approval-dialog" aria-labelledby="approval-title"><form method="dialog"><button class="close-dialog" aria-label="Fermer le récapitulatif">×</button></form><p class="eyebrow">VOTRE CRÉATION</p><h2 id="approval-title">C’est votre signature.</h2><div class="approved-preview"><img id="approved-print" alt="Motif personnalisé validé"></div><dl id="recap"></dl><div class="export-actions"><button id="export-svg" class="primary-button">Télécharger le motif SVG <span>↓</span></button><button id="export-png" class="secondary-button">Enregistrer l’aperçu du t-shirt</button></div><details class="export-details"><summary>Détails du fichier</summary><p>L’administration vérifie votre motif avant le paiement. Le dossier fournisseur contiendra ensuite les PNG complets avec les logos fixes. Les dimensions sont confirmées avec l’imprimeur.</p><button id="export-json" class="text-button">Conserver le dossier et les réglages (.json)</button></details><p class="error" id="export-error" role="alert" hidden></p></dialog>
+</body>
+</html>
