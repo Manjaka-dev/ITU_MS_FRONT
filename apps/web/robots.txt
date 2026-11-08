@@ -1,4 +1,5 @@
 User-agent: *
-Disallow: /admin
-Disallow: /confirmation
-Disallow: /commander
+Allow: /api/v1/media/
+Disallow: /api/
+
+# Le serveur ajoute le sitemap avec ITUMS_PUBLIC_URL. Les pages utilitaires portent noindex.

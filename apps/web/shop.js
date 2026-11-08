@@ -1,17 +1,17 @@
-import {APP,$,$$,escape as e,money,date,api,readCart,writeCart,addToCart,updateCartCount,toast,errorBox,download,svgImage,onSubmit,orderLabels,paymentLabels} from '/shared.js?v=20261101c';
+import {APP,$,$$,escape as e,money,date,api,readCart,writeCart,addToCart,updateCartCount,toast,errorBox,download,svgImage,onSubmit,orderLabels,paymentLabels,productImage} from '/shared.js?v=20261108';
 const root=$('#app');
 let shop;
 const button=(label,href,secondary=false)=>`<a class="button${secondary?' secondary':''}" href="${e(href)}">${e(label)} <span>↗</span></a>`;
 const heading=(small,title,extra='')=>`<div class="page-heading"><p class="eyebrow">${e(small)}</p><h1>${e(title)}</h1>${extra}</div>`;
 const empty=(title,text,link='/boutique')=>`<section class="empty-state"><p class="eyebrow">ITU MOTORS SOCIETY</p><h1>${e(title)}</h1><p>${e(text)}</p>${button('Voir la collection',link)}</section>`;
-const card=p=>`<article class="product-card"><a href="/produit/${e(p.slug)}" class="product-image"><img src="${e(p.photo)}" alt="${e(p.name)}" loading="lazy">${p.customization_template?'<span class="product-tag">Personnalisable</span>':''}</a><a href="/produit/${e(p.slug)}" class="product-info"><div><h3>${e(p.name)}</h3><span>${p.category==='tshirt'?'T-shirt':'Sweat'} · ITUMS</span></div><strong>${money(p.price)}</strong></a></article>`;
+const card=p=>`<article class="product-card"><a href="/produit/${e(p.slug)}" class="product-image">${productImage(p.photo,p.name)}${p.customization_template?'<span class="product-tag">Personnalisable</span>':''}</a><a href="/produit/${e(p.slug)}" class="product-info"><div><h3>${e(p.name)}</h3><span>${p.category==='tshirt'?'T-shirt':'Sweat'} · ITUMS</span></div><strong>${money(p.price)}</strong></a></article>`;
 
 async function collection(home=false){
   const category=new URLSearchParams(location.search).get('categorie')||'';
   const page=Number(new URLSearchParams(location.search).get('page')||1);
   const result=await api(`/products?page=${page}&page_size=12${category?'&category='+encodeURIComponent(category):''}`,{raw:true});
   const products=result.data;
-  root.innerHTML=(home?`<section class="hero"><div><p class="eyebrow">ITU MOTORS SOCIETY · COLLECTION 01</p><h1>L’automobile,<br>à porter<span>.</span></h1><p>Des pièces pour ceux qui vivent leur passion jusque dans les détails.</p>${button('Découvrir la collection','#collection')}<span class="hero-footnote">T-SHIRTS / SWEATS / VOTRE SIGNATURE</span></div><a class="hero-image" href="/produit/tshirt-megane"><img src="/assets/blueprint.png" alt="T-shirt Blueprint ITU Motors Society, devant et dos"><span>BLUEPRINT — ITUMS</span></a></section>`:heading('LA COLLECTION','Des pièces qui vous ressemblent.'))+
+  root.innerHTML=(home?`<section class="hero"><div><p class="eyebrow">ITU MOTORS SOCIETY · COLLECTION 01</p><h1>L’automobile,<br>à porter<span>.</span></h1><p>Des pièces pour ceux qui vivent leur passion jusque dans les détails.</p>${button('Découvrir la collection','#collection')}<span class="hero-footnote">T-SHIRTS / SWEATS / VOTRE SIGNATURE</span></div><a class="hero-image" href="/produit/tshirt-megane">${productImage('/assets/blueprint.png','T-shirt Blueprint ITU Motors Society, devant et dos','(max-width: 760px) 100vw, 55vw',true)}<span>BLUEPRINT — ITUMS</span></a></section>`:heading('LA COLLECTION','Des pièces qui vous ressemblent.'))+
     `<section id="collection" class="collection"><div class="collection-bar"><h2>${home?'La collection':'Toutes les pièces'} <small>${result.meta_data.total}</small></h2><nav aria-label="Catégories"><a class="${!category?'selected':''}" href="/boutique">Tout</a><a class="${category==='tshirt'?'selected':''}" href="/boutique?categorie=tshirt">T-shirts</a><a class="${category==='sweat'?'selected':''}" href="/boutique?categorie=sweat">Sweats</a></nav></div><div class="product-grid">${products.map(card).join('')||'<p>La collection arrive prochainement.</p>'}</div>${pagination(result.meta_data,p=>`/boutique?categorie=${e(category)}&page=${p}`)}</section>`+
     `<section class="personalize-band"><div><p class="eyebrow">VOTRE VOITURE, VOTRE SIGNATURE</p><h2>La vôtre mérite sa place.</h2><p>Ajoutez votre illustration aux compositions Heritage et Blueprint. Le résultat s’affiche avant de commander.</p></div>${button('Créer mon t-shirt','/produit/tshirt-bmw-e36',true)}</section>`;
 }
@@ -20,12 +20,12 @@ export function pagination(meta,href){return meta.total>meta.page_size?`<nav cla
 
 async function product(slug){
   const p=await api('/products/'+encodeURIComponent(slug));
-  document.title=p.name+' — ITU Motors Society';
+  if(!root.dataset.pageStatus)document.title=p.name+' — ITU Motors Society';
   const colors=[...new Set(p.variants.map(v=>v.color))];
   const sizeOrder=['XXS','XS','S','M','L','XL','XXL','XXXL'];
   const sizes=[...new Set(p.variants.map(v=>v.size))].sort((a,b)=>(sizeOrder.indexOf(a)<0?99:sizeOrder.indexOf(a))-(sizeOrder.indexOf(b)<0?99:sizeOrder.indexOf(b))||a.localeCompare(b));
   let color=colors[0],size=sizes.includes('M')?'M':sizes[0];
-  root.innerHTML=`<a class="back-link" href="/boutique">← La collection</a><section class="product-detail"><div class="detail-image"><img src="${e(p.photo)}" alt="${e(p.name)}"></div><div class="detail-content"><p class="eyebrow">COLLECTION 01 / ${p.category==='tshirt'?'T-SHIRT':'SWEAT'}</p><h1>${e(p.name)}</h1><p class="detail-price">${money(p.price)}</p><p class="description">${e(p.description)}</p><div class="product-options"><fieldset><legend>Couleur</legend><div class="option-buttons">${colors.map(c=>`<button data-color="${e(c)}" aria-pressed="${c===color}">${e(c)}</button>`).join('')}</div></fieldset><fieldset><legend>Taille</legend><div class="option-buttons">${sizes.map(s=>`<button data-size="${e(s)}" aria-pressed="${s===size}">${e(s)}</button>`).join('')}</div></fieldset></div><p id="availability" class="muted"></p><button id="add-standard" class="button full">Ajouter au panier <span>+</span></button>${p.customization_template?`<a class="button secondary full" href="/atelier/?produit=${e(p.slug)}">Personnaliser avec ma voiture <span>↗</span></a><p class="small muted">Votre SVG, intégré automatiquement.${p.customization_price?' Supplément : '+money(p.customization_price)+'.':''}</p>`:''}<div class="detail-notes"><p>Acompte de 50 % · Solde à la livraison</p>${p.lead_time?`<p>${e(p.lead_time)}</p>`:''}<a href="/livraison">Livraison & retours ↗</a></div></div></section>`;
+  root.innerHTML=`<a class="back-link" href="/boutique">← La collection</a><section class="product-detail"><div class="detail-image">${productImage(p.photo,p.name,'(max-width: 760px) 100vw, 55vw',true)}</div><div class="detail-content"><p class="eyebrow">COLLECTION 01 / ${p.category==='tshirt'?'T-SHIRT':'SWEAT'}</p><h1>${e(p.name)}</h1><p class="detail-price">${money(p.price)}</p><p class="description">${e(p.description)}</p><div class="product-options"><fieldset><legend>Couleur</legend><div class="option-buttons">${colors.map(c=>`<button data-color="${e(c)}" aria-pressed="${c===color}">${e(c)}</button>`).join('')}</div></fieldset><fieldset><legend>Taille</legend><div class="option-buttons">${sizes.map(s=>`<button data-size="${e(s)}" aria-pressed="${s===size}">${e(s)}</button>`).join('')}</div></fieldset></div><p id="availability" class="muted"></p><button id="add-standard" class="button full">Ajouter au panier <span>+</span></button>${p.customization_template?`<a class="button secondary full" href="/atelier/?produit=${e(p.slug)}">Personnaliser avec ma voiture <span>↗</span></a><p class="small muted">Votre SVG, intégré automatiquement.${p.customization_price?' Supplément : '+money(p.customization_price)+'.':''}</p>`:''}<div class="detail-notes"><p>Acompte de 50 % · Solde à la livraison</p>${p.lead_time?`<p>${e(p.lead_time)}</p>`:''}<a href="/livraison">Livraison & retours ↗</a></div></div></section>`;
   function selected(){return p.variants.find(v=>v.color===color && v.size===size && v.active);}
   function refresh(){
     $$('[data-color]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.color===color)));
@@ -121,13 +121,15 @@ function legal(kind){
 
 async function start(){
   updateCartCount();
-  if(location.pathname.startsWith('/admin')){const {renderAdmin}=await import('/admin.js?v=20261101c');await renderAdmin();return;}
+  if(root.dataset.pageStatus==='404')return;
+  if(location.pathname.startsWith('/admin')){const {renderAdmin}=await import('/admin.js?v=20261108');await renderAdmin();return;}
   shop=await api('/settings');
   const socialNav=$('footer nav');
   for(const [label,url] of [['Facebook',shop.social_url],['Instagram',shop.instagram_url]]){if(url){const a=document.createElement('a');a.href=url;a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';socialNav.append(a);}}
   const message=shop.announcement||(!shop.store_open?'La collection se prépare. Les commandes ouvriront prochainement.':'');
   if(message){$('#announcement').textContent=message;$('#announcement').hidden=false;}
   const path=location.pathname.replace(/\/$/,'')||'/';
+  if(root.dataset.publicPage==='static')return;
   if(path==='/')await collection(true);
   else if(path==='/boutique')await collection();
   else if(path.startsWith('/produit/'))await product(decodeURIComponent(path.split('/')[2]));

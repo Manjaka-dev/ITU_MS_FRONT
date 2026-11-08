@@ -1,3 +1,4 @@
+import {images} from '/assets/responsive/images.js?v=20261108';
 export const APP = Object.freeze({api:'/api/v1',cartKey:'itums_cart_v1',lastOrderKey:'itums_last_order_v1',checkoutKey:'itums_checkout_v1',maxCartBytes:4000000});
 export const $ = (s, root=document) => root.querySelector(s);
 export const $$ = (s, root=document) => [...root.querySelectorAll(s)];
@@ -42,3 +43,10 @@ export function svgImage(svg,alt='',classes=''){return `<img class="${escape(cla
 export async function busy(button, action){const text=button.textContent;button.disabled=true;button.textContent='Un instant…';try{return await action();}finally{button.disabled=false;button.textContent=text;}}
 export function onSubmit(form, handler){form.addEventListener('submit',async event=>{event.preventDefault();const old=$('.form-error',form);if(old)old.remove();try{await busy($('[type=submit]',form),()=>handler(new FormData(form)));}catch(error){form.insertAdjacentHTML('beforeend',errorBox(error.message));}});}
 export function formObject(form){return Object.fromEntries(form.entries());}
+
+// Only known catalogue photos get generated derivatives; uploaded photos keep their own URL.
+export function productImage(photo,alt,sizes='(max-width: 600px) 46vw, (max-width: 1000px) 30vw, 24vw',priority=false){
+  const variants=images[photo];
+  const extra=variants?.length?` srcset="${escape(variants.map(v=>v.src+' '+v.width+'w').join(', '))}" sizes="${escape(sizes)}" width="${variants.at(-1).width}" height="${variants.at(-1).height}"`:'';
+  return `<img src="${escape(variants?.[1]?.src||photo)}" alt="${escape(alt)}"${extra} decoding="async" ${priority?'fetchpriority="high" loading="eager"':'loading="lazy"'}>`;
+}
